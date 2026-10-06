@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазин — TechStore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">TechStore</a>
+      <nav class="nav">
+        <a href="#catalog" class="nav__link">Каталог</a>
+        <button class="cart-btn" id="cartToggle" aria-label="Открыть корзину">
+          Корзина
+          <span class="cart-btn__count" id="cartCount">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero__title">Cat Intertainment Tech Store</h1>
+        <p class="hero__subtitle">Тройной хлам втридорога в трёх самых труднодоступных точках планеты!</p>
+      </div>
+    </section>
+
+    <section class="catalog" id="catalog">
+      <div class="container">
+        <h2 class="section-title">Каталог товаров</h2>
+        <div class="products" id="products">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <div class="cart-panel__header">
+      <h2>Корзина</h2>
+      <button class="cart-panel__close" id="cartClose" aria-label="Закрыть корзину">&times;</button>
+    </div>
+    <div class="cart-panel__body" id="cartItems">
+      <p class="cart-empty">Корзина пуста</p>
+    </div>
+    <div class="cart-panel__footer">
+      <div class="cart-total">
+        Итого: <strong id="cartTotal">0</strong> ₽
+      </div>
+      <button class="btn btn--primary" id="checkoutBtn" disabled>Оформить заказ</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+</body>
+</html>
