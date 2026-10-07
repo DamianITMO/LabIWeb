@@ -61,7 +61,36 @@ function renderProducts() {
   `
   ).join("");
 }
-const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+
+function renderCart() {
+  if (cart.length === 0) {
+    cartItemsEl.innerHTML = '<p class="cart-empty">Корзина пуста</p>';
+    checkoutBtn.disabled = true;
+  } else {
+    cartItemsEl.innerHTML = cart
+      .map((item) => {
+        const product = PRODUCTS.find((p) => p.id === item.id);
+        if (!product) return "";
+        return `
+        <div class="cart-item" data-id="${item.id}">
+          <div class="cart-item__info">
+            <div class="cart-item__title">${product.emoji} ${product.title}</div>
+            <div class="cart-item__price">${formatPrice(product.price)} × ${item.qty}</div>
+            <div class="cart-item__controls">
+              <button class="qty-btn" data-action="decrease" data-id="${item.id}">−</button>
+              <span class="qty-value">${item.qty}</span>
+              <button class="qty-btn" data-action="increase" data-id="${item.id}">+</button>
+              <button class="btn btn--danger" data-action="remove" data-id="${item.id}">Удалить</button>
+            </div>
+          </div>
+        </div>
+      `;
+      })
+      .join("");
+    checkoutBtn.disabled = false;
+  }
+
+  const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
   const totalPrice = cart.reduce((sum, i) => {
     const p = PRODUCTS.find((pr) => pr.id === i.id);
     return sum + (p ? p.price * i.qty : 0);
@@ -143,6 +172,7 @@ function bindEvents() {
     }
   });
 
+  // Управление корзиной
   cartItemsEl.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-action]");
     if (!btn) return;
